@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const todoRoutes = require('./routes/todoRoutes');
+const scheduleRoutes = require('./routes/scheduleRoutes');
 const errorMiddleware = require('./middleware/errorMiddleware');
 
 require('dotenv').config();
@@ -8,11 +8,13 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.use(express.json());
+
 // Middleware
 app.use(bodyParser.json());
 
 // Routes
-app.use('/todos', todoRoutes);
+app.use('/schedules', scheduleRoutes);
 
 // Error middleware
 app.use(errorMiddleware);

@@ -1,32 +1,21 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../db');
+const db = require('../config/database');
 
-class Schedule extends Model {}
+exports.getAllSchedules = function(callback) {
+    db.query('SELECT * FROM schedules', callback);
+};
 
-Schedule.init({
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  title: {
-    type: DataTypes.STRING
-  },
-  description: {
-    type: DataTypes.STRING
-  },
-  participants: {
-    type: DataTypes.ARRAY
-  },
-  date: {
-    type: DataTypes.DATE
-  },
-  date: {
-    type: DataTypes.TIME
-  },
-}, {
-  sequelize,
-  modelName: 'Schedule'
-});
+exports.getScheduleById = function(id, callback) {
+    db.query('SELECT * FROM schedules WHERE id = ?', [id], callback);
+};
 
-module.exports = Schedule;
+exports.createSchedule = function(newSchedule, callback) {
+    db.query('INSERT INTO schedules SET ?', newSchedule, callback);
+};
+
+exports.updateSchedule = function(id, updatedSchedule, callback) {
+    db.query('UPDATE schedules SET ? WHERE id = ?', [updatedSchedule, id], callback);
+};
+
+exports.deleteSchedule = function(id, callback) {
+    db.query('DELETE FROM schedules WHERE id = ?', [id], callback);
+};

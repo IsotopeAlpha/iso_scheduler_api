@@ -1,4 +1,4 @@
-const Schedule = require('../models/schedule');
+const Schedule = require('../models/schedule.js');
 
 exports.getAllSchedules = function(req, res) {
     Schedule.getAllSchedules((err, schedules) => {
